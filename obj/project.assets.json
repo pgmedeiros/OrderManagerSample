@@ -1,0 +1,141 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "QuickFIXn.Core/1.11.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/QuickFix.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/QuickFix.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "QuickFIXn.FIX4.4/1.11.0": {
+        "type": "package",
+        "dependencies": {
+          "QuickFIXn.Core": "1.11.0"
+        },
+        "compile": {
+          "lib/net6.0/QuickFix.FIX44.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/QuickFix.FIX44.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "QuickFIXn.Core/1.11.0": {
+      "sha512": "LzcdX1XanqOtveGwiVfzY5SRW+6BnXaS0wfsgYNNsEM1XcpKMTm8KYwRatjnLBgVZVc8Zstm4xDuyImvGDI8Sg==",
+      "type": "package",
+      "path": "quickfixn.core/1.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/net6.0/QuickFix.dll",
+        "lib/net6.0/QuickFix.xml",
+        "quickfixn.core.1.11.0.nupkg.sha512",
+        "quickfixn.core.nuspec"
+      ]
+    },
+    "QuickFIXn.FIX4.4/1.11.0": {
+      "sha512": "EwS3Sdk9WE02Jbh3IVsJ31MJwxEleS9Kx0NmVwndzlx3BAK4/+c2DcI3r+VtR6PXSgGh+w76ZJY91SNv7wbCSA==",
+      "type": "package",
+      "path": "quickfixn.fix4.4/1.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/net6.0/QuickFix.FIX44.dll",
+        "quickfixn.fix4.4.1.11.0.nupkg.sha512",
+        "quickfixn.fix4.4.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "QuickFIXn.Core >= 1.11.0",
+      "QuickFIXn.FIX4.4 >= 1.11.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\pedro\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\estudo\\Teste\\Teste.csproj",
+      "projectName": "Teste",
+      "projectPath": "C:\\estudo\\Teste\\Teste.csproj",
+      "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
+      "outputPath": "C:\\estudo\\Teste\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "dependencies": {
+          "QuickFIXn.Core": {
+            "target": "Package",
+            "version": "[1.11.0, )"
+          },
+          "QuickFIXn.FIX4.4": {
+            "target": "Package",
+            "version": "[1.11.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
