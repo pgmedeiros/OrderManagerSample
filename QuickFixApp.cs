@@ -53,7 +53,11 @@ namespace teste
             new TransactTime(DateTime.Now),
             new OrdType(OrdType.MARKET));
 
-            Session.SendToTarget(order, MySessionID);
+            if (!(Session.SendToTarget(order, MySessionID)))
+            {
+                Console.WriteLine("Erro ao enviar ordem");
+            }
+
         }
 
     }
