@@ -17,5 +17,4 @@ EndTime=00:00:00
 HeartBtInt=20
 SocketConnectPort=1234
 SocketConnectHost=localhost
-DataDictionary=C:/estudo/teste/FIX44.xml	
-UseDataDictionary=Y
+DataDictionary=C:/estudo/teste/FIX44.xml
