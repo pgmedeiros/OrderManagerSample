@@ -1,2 +1,5 @@
 *.sln
 .vs
+
+obj/
+bin/
