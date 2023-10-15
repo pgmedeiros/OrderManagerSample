@@ -22,6 +22,14 @@ public class Program
     {
        initiator.Start();
        Thread.Sleep(2 * 1000);
-       app.Run();
+       if (app.isLogged)
+        {
+            app.Run();
+
+        } else
+        {
+            Console.WriteLine("Não foi possível realizar o login.");
+            Environment.Exit(0);
+        }
     }
 }
