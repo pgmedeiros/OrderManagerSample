@@ -1,5 +1,6 @@
 ﻿using QuickFix;
 using QuickFix.Fields;
+using QuickFix.FIX44;
 
 namespace teste
 {
@@ -8,20 +9,20 @@ namespace teste
 
         private SessionID MySessionID = null;
         public bool isLogged { get; private set; } = false;
-        public void ToAdmin(Message message, SessionID sessionID)
+        public void ToAdmin(QuickFix.Message message, SessionID sessionID)
         {
         }
 
-        public void FromAdmin(Message message, SessionID sessionID)
+        public void FromAdmin(QuickFix.Message message, SessionID sessionID)
         {
             Console.WriteLine("From Admin");
         }
 
-        public void ToApp(Message message, SessionID sessionID)
+        public void ToApp(QuickFix.Message message, SessionID sessionID)
         {
         }
 
-        public void FromApp(Message message, SessionID sessionID)
+        public void FromApp(QuickFix.Message message, SessionID sessionID)
         {
         }
 
@@ -37,23 +38,27 @@ namespace teste
 
         public void OnLogout(SessionID sessionID)
         {
+            isLogged = false;
+            Console.WriteLine("Logout realizado.");
         }
 
         public void OnLogon(SessionID sessionID)
         {
             isLogged = true;
-            Console.WriteLine("Login realizado");
+            Console.WriteLine("Login realizado.");
         }
 
-        public void createOrder()
+        public NewOrderSingle orderExample()
         {
             var order = new QuickFix.FIX44.NewOrderSingle(
-            new ClOrdID("1234"),
-            new Symbol("AAPL"),
-            new Side(Side.BUY),
-            new TransactTime(DateTime.Now),
-            new OrdType(OrdType.MARKET));
+             new ClOrdID("1234"),
+             new Symbol("AAPL"),
+             new Side(Side.BUY),
+             new TransactTime(DateTime.Now),
+             new OrdType(OrdType.MARKET));
 
+           
+            
             order.Set(new HandlInst('1'));
             order.Set(new OrderQty(10));
             order.Set(new TimeInForce('1'));
@@ -61,15 +66,20 @@ namespace teste
             order.Set(new StopPx(12));
             order.Set(new TimeInForce('1'));
 
+            return order;
+        }
+
+        public void createOrder(NewOrderSingle order)
+        {
             bool f = Session.SendToTarget(order, MySessionID);
 
 
             if (!(f))
             {
-                Console.WriteLine("Erro ao enviar ordem");
+                Console.WriteLine("Erro ao enviar ordem.");
             } else
             {
-                Console.WriteLine("TUDO CERTO ao enviar ordem");
+                Console.WriteLine("Ordem enviada com sucesso.");
             }
 
         }
@@ -82,16 +92,17 @@ namespace teste
             while (shouldRun)
             {
                 Console.WriteLine("----------------- TRADER CLIENT --------------------");
-                Console.WriteLine("1. Realizar ordem\n 2.Sair");
+                Console.WriteLine("1.Realizar ordem\n2.Sair");
 
-                string? entrada = Console.ReadLine();
+                string? input = Console.ReadLine();
 
-                if (entrada == "1") 
+                if (input == "1") 
                 {
-                    createOrder();
-                } else if(entrada == "2")
+                    createOrder(orderExample());
+                
+                } else if(input == "2")
                 {
-                    break;
+                    shouldRun = false;
                 } else
                 {
                     Console.WriteLine("Escolha uma opção válida");
