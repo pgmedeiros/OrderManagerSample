@@ -1,20 +1,14 @@
 ﻿using QuickFix;
 using QuickFix.Transport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using teste;
 
-namespace Teste
+namespace OrderApi.QuickFixClass
 {
     internal class InitiatorFactory
     {
 
         public static SocketInitiator Build(QuickFixApp app)
         {
-            SessionSettings settings = new SessionSettings("C:/estudo/OrderManagerSample/config.txt");
+            SessionSettings settings = new SessionSettings("C:/estudo/OrderManagerSample/Configs/quickFixConfig.txt");
 
             IMessageStoreFactory storeFactory = new FileStoreFactory(settings);
             ILogFactory logFactory = new QuickFix.ScreenLogFactory(settings);

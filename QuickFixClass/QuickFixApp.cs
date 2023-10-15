@@ -2,7 +2,7 @@
 using QuickFix.Fields;
 using QuickFix.FIX44;
 
-namespace teste
+namespace OrderApi.QuickFixClass
 {
     internal class QuickFixApp : IApplication
     {
@@ -33,7 +33,7 @@ namespace teste
 
         public SessionID getSessionId()
         {
-            return this.MySessionID;
+            return MySessionID;
         }
 
         public void OnLogout(SessionID sessionID)
@@ -57,8 +57,8 @@ namespace teste
              new TransactTime(DateTime.Now),
              new OrdType(OrdType.MARKET));
 
-           
-            
+
+
             order.Set(new HandlInst('1'));
             order.Set(new OrderQty(10));
             order.Set(new TimeInForce('1'));
@@ -74,10 +74,11 @@ namespace teste
             bool f = Session.SendToTarget(order, MySessionID);
 
 
-            if (!(f))
+            if (!f)
             {
                 Console.WriteLine("Erro ao enviar ordem.");
-            } else
+            }
+            else
             {
                 Console.WriteLine("Ordem enviada com sucesso.");
             }
@@ -87,30 +88,13 @@ namespace teste
 
         public void Run()
         {
-            bool shouldRun = true;
 
-            while (shouldRun)
             {
-                Console.WriteLine("----------------- TRADER CLIENT --------------------");
-                Console.WriteLine("1.Realizar ordem\n2.Sair");
-
-                string? input = Console.ReadLine();
-
-                if (input == "1") 
-                {
-                    createOrder(orderExample());
-                
-                } else if(input == "2")
-                {
-                    shouldRun = false;
-                } else
-                {
-                    Console.WriteLine("Escolha uma opção válida");
-                }
+                createOrder(orderExample());
 
             }
         }
     }
 
-       
+
 }
