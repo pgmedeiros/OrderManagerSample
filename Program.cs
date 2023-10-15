@@ -1,40 +1,25 @@
-﻿using QuickFix;
-using QuickFix.Transport;
-using teste;
-using Teste;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-
-    static void Main()
-    {
-
-        QuickFixApp quickFixApp = new QuickFixApp();
-
-        SocketInitiator initiator = InitiatorFactory.Build(quickFixApp);
-        
-        StartConsoleApplication(initiator, quickFixApp);
-
-        initiator.Stop();
-    }
-
-    static void StartConsoleApplication(AbstractInitiator initiator, QuickFixApp app)
-    {
-       
-        initiator.Start();
-       
-        Thread.Sleep(2 * 1000);
-      
-        if (app.isLogged)
-       
-        {
-            app.Run();
-       
-        } else
-      
-        {
-            Console.WriteLine("Não foi possível realizar o login.");
-            Environment.Exit(1);
-        }
-    }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
