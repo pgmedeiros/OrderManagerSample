@@ -11,6 +11,7 @@ namespace OrderApi.QuickFixClass
         private readonly string ERROR_MESSAGE = "A quantidade deve ser maior que zero.";
         private readonly int ZERO = 0;
         private readonly string BUY_CODE = "COMPRA";
+        private readonly string INTITUTE_EXAMPLE_COD = "ABCD";
         QuickFixApp app;
         SocketInitiator initiator;
         public string InitiateProcessToSendOrder(Order order)
@@ -70,7 +71,7 @@ namespace OrderApi.QuickFixClass
         {
             
             var newOrderSingle = new NewOrderSingle(
-                new ClOrdID("1234"),
+                new ClOrdID(INTITUTE_EXAMPLE_COD),
                 new Symbol(order.symbol),
                 new Side(defineSide(order)),
                 new TransactTime(DateTime.Now),
