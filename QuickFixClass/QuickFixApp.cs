@@ -1,4 +1,5 @@
-﻿using QuickFix;
+﻿using OrderApi.Models;
+using QuickFix;
 using QuickFix.Fields;
 using QuickFix.FIX44;
 
@@ -46,53 +47,6 @@ namespace OrderApi.QuickFixClass
         {
             isLogged = true;
             Console.WriteLine("Login realizado.");
-        }
-
-        public NewOrderSingle orderExample()
-        {
-            var order = new QuickFix.FIX44.NewOrderSingle(
-             new ClOrdID("1234"),
-             new Symbol("AAPL"),
-             new Side(Side.BUY),
-             new TransactTime(DateTime.Now),
-             new OrdType(OrdType.MARKET));
-
-
-
-            order.Set(new HandlInst('1'));
-            order.Set(new OrderQty(10));
-            order.Set(new TimeInForce('1'));
-            order.Set(new Price(20));
-            order.Set(new StopPx(12));
-            order.Set(new TimeInForce('1'));
-
-            return order;
-        }
-
-        public void createOrder(NewOrderSingle order)
-        {
-            bool f = Session.SendToTarget(order, MySessionID);
-
-
-            if (!f)
-            {
-                Console.WriteLine("Erro ao enviar ordem.");
-            }
-            else
-            {
-                Console.WriteLine("Ordem enviada com sucesso.");
-            }
-
-        }
-
-
-        public void Run()
-        {
-
-            {
-                createOrder(orderExample());
-
-            }
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OrderApi.Models;
 using OrderApi.QuickFixClass;
 
 namespace OrderApi.Controllers
@@ -9,18 +10,34 @@ namespace OrderApi.Controllers
     public class OrderManagerController : ControllerBase
     {
 
-        QuickFixService q = null;
+        private readonly QuickFixService quickFixService_;
 
-        [HttpGet]
-        [Route("Josefo")]
-        public string CreateOrder()
+        public OrderManagerController(QuickFixService quickFixService)
         {
-            q = new QuickFixService();
-           
-            q.Do();
-            q.Logout();
+            quickFixService_ = quickFixService;
+        }
 
-            return "ok";    
+        [HttpPost]
+        [Route("create_order")]
+        public string CreateOrder(Order order)
+        {
+
+            if (!isInvalid(order))
+            {
+                string retorno = quickFixService_.SendOrder(order);
+                quickFixService_.Logout();
+                return retorno;
+            } else
+            {
+                return "A quantidade deve ser maior que zero.";
+            }
+          
+        }
+
+        private bool isInvalid(Order order)
+        {
+            return (order.qty <= 0);
+          
         }
       
     }
