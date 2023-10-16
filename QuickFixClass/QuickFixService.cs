@@ -10,17 +10,17 @@ namespace OrderApi.QuickFixClass
     {
         private readonly string ERROR_MESSAGE = "A quantidade deve ser maior que zero.";
         private readonly int ZERO = 0;
-
-
-        SocketInitiator initiator = null;
+        QuickFixApp app;
+        SocketInitiator initiator;
         public string InitiateProcessToSendOrder(Order order)
         {
 
-            QuickFixApp quickFixApp = new QuickFixApp();
+            app = AppFactory.GetInstance();
+            initiator = InitiatorFactory.GetInstance(app);
+            
 
-            initiator = InitiatorFactory.Build(quickFixApp);
 
-            return LoginAndSendOrder(initiator, quickFixApp, order);
+            return LoginAndSendOrder(initiator, app, order);
         }
      
         private string LoginAndSendOrder(AbstractInitiator initiator, QuickFixApp app, Order order)
@@ -67,12 +67,6 @@ namespace OrderApi.QuickFixClass
             }
 
         }
-
-        public void Logout()
-        {
-            initiator.Stop();
-        }
-
         public static NewOrderSingle OrderToNewOrderSingle(Order order)
         {
             

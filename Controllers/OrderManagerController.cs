@@ -22,9 +22,7 @@ namespace OrderApi.Controllers
         public string CreateOrder(Order order)
         {
             var status = quickFixService_.InitiateProcessToSendOrder(order);
-            quickFixService_.Logout();
             return status;
         }
-      
     }
 }
