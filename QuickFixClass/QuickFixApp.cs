@@ -9,7 +9,6 @@ namespace OrderApi.QuickFixClass
     {
 
         private SessionID MySessionID = null;
-        public bool isLogged { get; private set; } = false;
         public void ToAdmin(QuickFix.Message message, SessionID sessionID)
         {
         }
@@ -39,13 +38,11 @@ namespace OrderApi.QuickFixClass
 
         public void OnLogout(SessionID sessionID)
         {
-            isLogged = false;
             Console.WriteLine("Logout realizado.");
         }
 
         public void OnLogon(SessionID sessionID)
         {
-            isLogged = true;
             Console.WriteLine("Login realizado.");
         }
     }
