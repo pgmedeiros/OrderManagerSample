@@ -9,6 +9,8 @@ namespace OrderApi.QuickFixClass
     {
 
         private SessionID MySessionID = null;
+        private Waiting waiting = null;
+
         public void ToAdmin(QuickFix.Message message, SessionID sessionID)
         {
         }
@@ -24,6 +26,8 @@ namespace OrderApi.QuickFixClass
 
         public void FromApp(QuickFix.Message message, SessionID sessionID)
         {
+
+            waiting.Result = 1;
         }
 
         public void OnCreate(SessionID sessionID)
@@ -44,6 +48,11 @@ namespace OrderApi.QuickFixClass
         public void OnLogon(SessionID sessionID)
         {
             Console.WriteLine("Login realizado.");
+        }
+
+        public void setWaiting(Waiting waiting)
+        {
+            this.waiting = waiting;
         }
     }
 

@@ -25,7 +25,7 @@
 			</item>
 			<item>
 				<first>InSeqNo</first>
-				<second>1 1</second>
+				<second>2 48</second>
 			</item>
 			<item>
 				<first>IsConfigured</first>
@@ -37,7 +37,7 @@
 			</item>
 			<item>
 				<first>OutSeqNo</first>
-				<second>1 1</second>
+				<second>2 50</second>
 			</item>
 			<item>
 				<first>Securities</first>
@@ -137,7 +137,7 @@ Expect:35=8|150=4|39=4|20=0|38=10000|14=0|151=0|32=0</second>
 			</item>
 			<item>
 				<first>IndicationofInterest</first>
-				<second>0 0 6 0 5 +35=6 4 +23= 4 +28= 4 +55= 4 +54= 4 +27=</second>
+				<second>0 0 12 0 5 +35=8 10 +37=&quot;ABCD&quot; 18 +17=&quot;EXEC MESSAGE&quot; 6 +150=0 5 +39=0 12 +55=&quot;SYMBOL&quot; 5 +54=1 6 +38=38 8 +151=151 6 +14=14 4 +6=0 6 +453=0</second>
 			</item>
 			<item>
 				<first>ListCancelRequest</first>

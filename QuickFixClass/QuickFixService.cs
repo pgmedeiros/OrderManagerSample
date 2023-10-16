@@ -12,20 +12,22 @@ namespace OrderApi.QuickFixClass
         private readonly int ZERO = 0;
         private readonly string BUY_CODE = "COMPRA";
         private readonly string INTITUTE_EXAMPLE_COD = "ABCD";
+        
         QuickFixApp app;
         SocketInitiator initiator;
         public string InitiateProcessToSendOrder(Order order)
         {
-
+            var waiting = new Waiting();
             app = AppFactory.GetInstance();
             initiator = InitiatorFactory.GetInstance(app);
-            
+
+            app.setWaiting(waiting);
 
 
-            return LoginAndSendOrder(initiator, app, order);
+            return LoginAndSendOrder(initiator, app, order, waiting);
         }
      
-        private string LoginAndSendOrder(AbstractInitiator initiator, QuickFixApp app, Order order)
+        private string LoginAndSendOrder(AbstractInitiator initiator, QuickFixApp app, Order order, Waiting waiting)
         {
 
             if (isInvalid(order))
@@ -42,7 +44,7 @@ namespace OrderApi.QuickFixClass
 
             if (initiator.IsLoggedOn)
             {
-                return SendOrder(order, app);
+                return SendOrder(order, app, waiting);
 
             }
 
@@ -51,7 +53,7 @@ namespace OrderApi.QuickFixClass
         }
 
 
-        private string SendOrder(Order order, QuickFixApp app)
+        private string SendOrder(Order order, QuickFixApp app, Waiting waiting)
         {
 
             bool orderAchieveTarget = Session.SendToTarget(OrderToNewOrderSingle(order), app.getSessionId());
@@ -59,11 +61,22 @@ namespace OrderApi.QuickFixClass
 
             if (!orderAchieveTarget)
             {
-                return "Erro ao enviar ordem.";
+               Console.WriteLine("Erro ao enviar ordem.");
+                return "Erro";
             }
             else
             {
-                return "Ordem enviada com sucesso.";
+                Console.WriteLine("Ordem enviada com sucesso.");
+                
+                while (waiting.Result == 0) ;
+
+                if (waiting.Result == 1)
+                {
+                    return "Ok";
+                } else
+                {
+                    return "Erro";
+                }
             }
 
         }

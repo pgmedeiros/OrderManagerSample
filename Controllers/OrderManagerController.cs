@@ -11,6 +11,7 @@ namespace OrderApi.Controllers
     {
 
         private readonly QuickFixService quickFixService_;
+        
 
         public OrderManagerController(QuickFixService quickFixService)
         {
@@ -21,8 +22,9 @@ namespace OrderApi.Controllers
         [Route("create_order")]
         public string CreateOrder(Order order)
         {
-            var status = quickFixService_.InitiateProcessToSendOrder(order);
-            return status;
+
+            return quickFixService_.InitiateProcessToSendOrder(order);
+           
         }
     }
 }
