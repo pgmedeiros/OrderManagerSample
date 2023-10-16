@@ -5,7 +5,7 @@ using QuickFix.FIX44;
 
 namespace OrderApi.QuickFixClass
 {
-    internal class QuickFixApp : IApplication
+    internal class QuickFixApp : MessageCracker, IApplication
     {
 
         private SessionID MySessionID = null;
@@ -26,8 +26,17 @@ namespace OrderApi.QuickFixClass
 
         public void FromApp(QuickFix.Message message, SessionID sessionID)
         {
-
-            waiting.Result = 1;
+            Console.WriteLine("IN:  " + message.ToString());
+            try
+            {
+                Crack(message, sessionID);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("==Cracker exception==");
+                Console.WriteLine(ex.ToString());
+                Console.WriteLine(ex.StackTrace);
+            }
         }
 
         public void OnCreate(SessionID sessionID)
@@ -54,7 +63,13 @@ namespace OrderApi.QuickFixClass
         {
             this.waiting = waiting;
         }
+
+        public void OnMessage(ExecutionReport m, SessionID s)
+        {
+            Console.WriteLine("Received execution report");
+
+            waiting.Result = m.OrdStatus.getValue();
+        }
     }
-
-
+    
 }

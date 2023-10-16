@@ -2,6 +2,6 @@
 {
     public class Waiting
     {
-        public int Result { get; set; } = 0;
+        public char Result { get; set; } = '@';
     }
 }
