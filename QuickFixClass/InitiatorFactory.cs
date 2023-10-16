@@ -13,7 +13,7 @@ namespace OrderApi.QuickFixClass
 
             if (instance == null)
             {
-                SessionSettings settings = new SessionSettings("C:/estudo/OrderManagerSample/Configs/quickFixConfig.txt");
+                SessionSettings settings = new SessionSettings("Configs/quickFixConfig.txt");
 
                 IMessageStoreFactory storeFactory = new FileStoreFactory(settings);
                 ILogFactory logFactory = new QuickFix.ScreenLogFactory(settings);

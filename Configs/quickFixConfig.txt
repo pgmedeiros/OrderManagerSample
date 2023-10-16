@@ -10,11 +10,12 @@ SenderCompID=TW
 [SESSION]
 # inherit FileStorePath, FileLogPath, ConnectionType, 
 #    ReconnectInterval and SenderCompID from default
+# Colocar ip da sua maquina em SocketConnectHost
 BeginString=FIX.4.4
 TargetCompID=ARCA
 StartTime=00:00:00
 EndTime=00:00:00
 HeartBtInt=20
 SocketConnectPort=1234
-SocketConnectHost=localhost
-DataDictionary=C:/estudo/teste/FIX44.xml
+SocketConnectHost=172.20.64.1
+DataDictionary=Configs/FIX44.xml
