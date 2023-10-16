@@ -8,11 +8,52 @@ namespace OrderApi.QuickFixClass
 {
     public class QuickFixService
     {
+        private readonly string ERROR_MESSAGE = "A quantidade deve ser maior que zero.";
+        private readonly int ZERO = 0;
+
 
         SocketInitiator initiator = null;
-        private static string TryToSend(Order order, QuickFixApp app)
+        public string InitiateProcessToSendOrder(Order order)
         {
-            
+
+            QuickFixApp quickFixApp = new QuickFixApp();
+
+            initiator = InitiatorFactory.Build(quickFixApp);
+
+            return LoginAndSendOrder(initiator, quickFixApp, order);
+        }
+     
+        private string LoginAndSendOrder(AbstractInitiator initiator, QuickFixApp app, Order order)
+        {
+
+            if (isInvalid(order))
+            {
+                return ERROR_MESSAGE;
+            }
+
+            if (!initiator.IsLoggedOn)
+            {
+                initiator.Start();
+
+                Thread.Sleep(2 * 1000);
+            } 
+
+            if (initiator.IsLoggedOn)
+
+            {
+                return SendOrder(order, app);
+            }
+            else
+
+            {
+                return "Não foi possível realizar o login.";
+            }
+        }
+
+
+        private static string SendOrder(Order order, QuickFixApp app)
+        {
+
             bool f = Session.SendToTarget(OrderToNewOrderSingle(order), app.getSessionId());
 
 
@@ -27,41 +68,9 @@ namespace OrderApi.QuickFixClass
 
         }
 
-        public string SendOrder(Order order)
-        {
-
-            QuickFixApp quickFixApp = new QuickFixApp();
-
-            initiator = InitiatorFactory.Build(quickFixApp);
-
-            return LoginAndSendOrder(initiator, quickFixApp, order);
-        }
-
         public void Logout()
         {
             initiator.Stop();
-        }
-
-        static string LoginAndSendOrder(AbstractInitiator initiator, QuickFixApp app, Order order)
-        {
-
-            if (!initiator.IsLoggedOn)
-            {
-                initiator.Start();
-
-                Thread.Sleep(2 * 1000);
-            } 
-
-            if (app.isLogged)
-
-            {
-                return TryToSend(order, app);
-            }
-            else
-
-            {
-                return "Não foi possível realizar o login.";
-            }
         }
 
         public static NewOrderSingle OrderToNewOrderSingle(Order order)
@@ -83,12 +92,17 @@ namespace OrderApi.QuickFixClass
 
         private static char defineSide(Order order)
         {
-            if (order.side == null || order.side == "1")
+            if (order.side == null || order.side == "COMPRA")
             {
                 return Side.BUY;
             }
 
             return Side.SELL;
+        }
+
+        private  bool isInvalid(Order order)
+        {
+            return (order.qty <= ZERO);
         }
 
     }   
