@@ -10,6 +10,7 @@ namespace OrderApi.QuickFixClass
     {
         private readonly string ERROR_MESSAGE = "A quantidade deve ser maior que zero.";
         private readonly int ZERO = 0;
+        private readonly string BUY_CODE = "COMPRA";
         QuickFixApp app;
         SocketInitiator initiator;
         public string InitiateProcessToSendOrder(Order order)
@@ -36,28 +37,26 @@ namespace OrderApi.QuickFixClass
                 initiator.Start();
 
                 Thread.Sleep(2 * 1000);
-            } 
+            }
 
             if (initiator.IsLoggedOn)
-
             {
                 return SendOrder(order, app);
-            }
-            else
 
-            {
-                return "Não foi possível realizar o login.";
             }
+
+            return "Não foi possível fazer login";
+
         }
 
 
-        private static string SendOrder(Order order, QuickFixApp app)
+        private string SendOrder(Order order, QuickFixApp app)
         {
 
-            bool f = Session.SendToTarget(OrderToNewOrderSingle(order), app.getSessionId());
+            bool orderAchieveTarget = Session.SendToTarget(OrderToNewOrderSingle(order), app.getSessionId());
 
 
-            if (!f)
+            if (!orderAchieveTarget)
             {
                 return "Erro ao enviar ordem.";
             }
@@ -67,7 +66,7 @@ namespace OrderApi.QuickFixClass
             }
 
         }
-        public static NewOrderSingle OrderToNewOrderSingle(Order order)
+        public NewOrderSingle OrderToNewOrderSingle(Order order)
         {
             
             var newOrderSingle = new NewOrderSingle(
@@ -84,9 +83,9 @@ namespace OrderApi.QuickFixClass
             return newOrderSingle;
         }
 
-        private static char defineSide(Order order)
+        private char defineSide(Order order)
         {
-            if (order.side == null || order.side == "COMPRA")
+            if (order.side == null || order.side == BUY_CODE)
             {
                 return Side.BUY;
             }
@@ -94,7 +93,7 @@ namespace OrderApi.QuickFixClass
             return Side.SELL;
         }
 
-        private  bool isInvalid(Order order)
+        private bool isInvalid(Order order)
         {
             return (order.qty <= ZERO);
         }
