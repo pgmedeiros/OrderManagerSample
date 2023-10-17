@@ -25,7 +25,7 @@
 			</item>
 			<item>
 				<first>InSeqNo</first>
-				<second>2 48</second>
+				<second>2 40</second>
 			</item>
 			<item>
 				<first>IsConfigured</first>
@@ -37,7 +37,7 @@
 			</item>
 			<item>
 				<first>OutSeqNo</first>
-				<second>2 50</second>
+				<second>2 42</second>
 			</item>
 			<item>
 				<first>Securities</first>
@@ -93,7 +93,7 @@ Expect:35=8|150=4|39=4|20=0|38=10000|14=0|151=0|32=0</second>
 	</batchConf>
 	<transConf>
 		<Software_MiniFIX_Transaction>
-			<count>46</count>
+			<count>47</count>
 			<item_version>0</item_version>
 			<item>
 				<first>Advertisement</first>
@@ -129,7 +129,11 @@ Expect:35=8|150=4|39=4|20=0|38=10000|14=0|151=0|32=0</second>
 			</item>
 			<item>
 				<first>ExecutionReport</first>
-				<second>0 0 11 0 5 +35=8 4 +37= 4 +17= 5 +20=0 6 +150=0 5 +39=0 12 +55=ERICB.ST 5 +54=1 9 +151=1000 5 +14=0 4 +6=0</second>
+				<second>0 0 11 0 5 +35=8 14 +37=&quot;ORDER_ID&quot; 6 +150=0 5 +39=0 12 +55=ERICB.ST 5 +54=1 9 +151=1000 5 +14=0 4 +6=0 6 +453=0 13 +17=&quot;EXEC ID&quot;</second>
+			</item>
+			<item>
+				<first>ExecutionReportCopy</first>
+				<second>0 0 11 0 5 +35=8 14 +37=&quot;ORDER_ID&quot; 6 +150=0 5 +39=0 12 +55=ERICB.ST 5 +54=1 9 +151=1000 5 +14=0 4 +6=0 6 +453=0 13 +17=&quot;EXEC ID&quot;</second>
 			</item>
 			<item>
 				<first>Heartbeat</first>
