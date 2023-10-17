@@ -1,6 +1,5 @@
 ﻿using OrderApi.Models;
 using QuickFix;
-using QuickFix.Fields;
 using QuickFix.FIX44;
 
 namespace OrderApi.QuickFixClass

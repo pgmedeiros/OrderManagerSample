@@ -68,9 +68,9 @@ namespace OrderApi.QuickFixClass
             {
                 Console.WriteLine("Ordem enviada com sucesso.");
                 
-                while (waiting.Result == '@') ;
+                while (waiting.Result == Waiting.getConstantWithoutChange()) ;
 
-                if (waiting.Result == '0')
+                if (waiting.Result == Waiting.getValueNew())
                 {
                     return "Ok";
                 } else
